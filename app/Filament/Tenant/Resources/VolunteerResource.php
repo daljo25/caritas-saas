@@ -12,18 +12,54 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Carbon\Carbon;
 
 class VolunteerResource extends Resource
 {
     protected static ?string $model = Volunteer::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Registro de datos';
+    protected static ?string $label = 'Voluntarios';
+    protected static ?string $navigationIcon = 'tabler-mood-heart';
+    protected static ?string $recordTitleAttribute = 'Voluntarios';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label('Nombres y Apellidos')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('dni')
+                    ->label('DNI / NIE / PAS')
+                    ->maxLength(255),
+                Forms\Components\DatePicker::make('birth_date')
+                    ->label('Fecha de Nacimiento'),
+                Forms\Components\Select::make('gender')
+                    ->label('Género')
+                    ->options([
+                        'Masculino' => 'Masculino',
+                        'Femenino' => 'Femenino',
+                    ]),
+                Forms\Components\TextInput::make('address')
+                    ->label('Dirección')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label('Teléfono')
+                    ->tel()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->label('Correo Electrónico')
+                    ->email()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('notes')
+                    ->label('Notas')
+                    ->maxLength(65535),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Imagen')
+                    ->image()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -31,7 +67,50 @@ class VolunteerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nombres y Apellidos')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('dni')
+                    ->label('DNI / NIE / PAS')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('birth_date')
+                    ->label('Fecha de Nacimiento')
+                    ->date('d-m-Y')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('age')
+                    ->label('Edad')
+                    ->sortable()
+                    ->state(function (Volunteer $record): ?string {
+                        return Carbon::parse($record->birth_date)->age;
+                    })
+                    ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('gender')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Dirección')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('Teléfono')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Correo Electrónico')
+                    ->searchable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Imagen'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Fecha de Creación')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Fecha de Actualización')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
