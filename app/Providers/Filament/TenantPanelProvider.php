@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use Filament\Support\Enums\MaxWidth;
 
 class TenantPanelProvider extends PanelProvider
 {
@@ -28,6 +29,17 @@ class TenantPanelProvider extends PanelProvider
             ->id('tenant')
             ->path('/admin')
             ->login()
+            ->passwordReset()
+            ->unsavedChangesAlerts()
+            ->emailVerification()
+            ->profile(isSimple: false)
+            ->spa()
+            ->globalSearch(false)
+            ->maxContentWidth(MaxWidth::Full)
+            ->sidebarCollapsibleOnDesktop()
+            ->brandLogo(asset('images/logo.svg'))
+            ->brandLogoHeight('2.5rem')
+            ->favicon(asset('images/favicon.svg'))
             ->colors([
                 'primary' => Color::Red,
             ])
@@ -38,8 +50,7 @@ class TenantPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Tenant/Widgets'), for: 'App\\Filament\\Tenant\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                //
             ])
             ->middleware([
                 EncryptCookies::class,
