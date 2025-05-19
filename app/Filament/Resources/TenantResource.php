@@ -16,8 +16,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TenantResource extends Resource
 {
     protected static ?string $model = Tenant::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Parroquias';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationLabel = 'Parroquias';
+    protected static ?string $label = 'Parroquia';
+    protected static ?string $pluralLabel = 'Parroquias';
+    protected static ?string $navigationIcon = 'tabler-building-church';
 
     public static function form(Form $form): Form
     {
