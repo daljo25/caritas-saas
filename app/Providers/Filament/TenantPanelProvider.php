@@ -71,7 +71,7 @@ class TenantPanelProvider extends PanelProvider
             ->plugins([
                 EasyFooterPlugin::make()
                     ->footerEnabled()
-                    ->withSentence('Caritas Bellavista')
+                    ->withSentence('Caritas SaaS')
                     ->withGithub(showLogo: true, showUrl: true)
                     ->withLogo(
                         'https://avatars.githubusercontent.com/u/7244602',
