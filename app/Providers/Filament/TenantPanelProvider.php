@@ -20,6 +20,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use Filament\Support\Enums\MaxWidth;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 
 class TenantPanelProvider extends PanelProvider
 {
@@ -66,6 +67,19 @@ class TenantPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                EasyFooterPlugin::make()
+                    ->footerEnabled()
+                    ->withSentence('Caritas Bellavista')
+                    ->withGithub(showLogo: true, showUrl: true)
+                    ->withLogo(
+                        'https://avatars.githubusercontent.com/u/7244602',
+                        'https://github.com/daljo25',
+                        'Creado Por Daljo25',
+                        30
+                    )
+                    ->withBorder(),
             ]);
     }
 }
