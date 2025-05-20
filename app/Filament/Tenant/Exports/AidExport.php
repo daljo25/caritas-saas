@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Filament\Tenant\Exports;
 
 use App\Models\Aid;
 use Illuminate\Support\Collection;
