@@ -1,11 +1,9 @@
 resources por hacer
 -Appointment Enzo
 -Attendance  Enzo
--Beneficiary Alberto
 -Derivation  Enzo
 -Donation Enzo
 -Donor Enzo
--Family Alberto
 -GiftCard Enzo
 -MonthlyReport Enzo
 -User Enzo
@@ -15,3 +13,5 @@ resources hechos
 -Aid
 -Volunteer
 -Collaborator
+-Beneficiary
+Family
