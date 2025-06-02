@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -52,6 +53,20 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+            ])
+            ->plugins([
+                \MarcoGermani87\FilamentCookieConsent\FilamentCookieConsent::make(),
+                EasyFooterPlugin::make()
+                    ->footerEnabled()
+                    ->withSentence('Caritas SaaS')
+                    ->withGithub(showLogo: true, showUrl: true)
+                    ->withLogo(
+                        'https://avatars.githubusercontent.com/u/7244602',
+                        'https://github.com/daljo25',
+                        'Creado Por Daljo25',
+                        30
+                    )
+                    ->withBorder(),
             ])
             ->authMiddleware([
                 Authenticate::class,

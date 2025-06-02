@@ -69,6 +69,7 @@ class TenantPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                \MarcoGermani87\FilamentCookieConsent\FilamentCookieConsent::make(),
                 EasyFooterPlugin::make()
                     ->footerEnabled()
                     ->withSentence('Caritas SaaS')
