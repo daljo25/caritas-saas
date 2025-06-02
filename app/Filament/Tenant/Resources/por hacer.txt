@@ -1,4 +1,5 @@
 resources por hacer
+<<<<<<< HEAD
 -Attendance  Enzo
 -Derivation  Enzo
 -Donation Enzo
@@ -6,6 +7,17 @@ resources por hacer
 -GiftCard Enzo
 -MonthlyReport Enzo
 -User Enzo
+=======
+-Attendance  Enzo......
+-Beneficiary Alberto
+-Derivation  Enzo.....
+-Donation Enzo..... no hay
+-Donor Enzo....
+-Family Alberto
+-GiftCard Enzo.....
+-MonthlyReport Enzo....
+-User Enzo....
+>>>>>>> 029a24a (resources terminados)
 
 
 resources hechos

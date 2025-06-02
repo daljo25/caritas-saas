@@ -7,6 +7,7 @@ use App\Filament\Tenant\Resources\DerivationResource\RelationManagers;
 use App\Models\Derivation;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -22,16 +23,78 @@ class DerivationResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
-    }
+             ->schema([
+                Fieldset::make('Titular y Voluntario')
+                    ->schema([
+                        Forms\Components\Select::make('beneficiary_id')
+                            ->label('Usuario')
+                            ->relationship('beneficiary', 'name')
+                            ->required()
+                            ->preload()
+                            ->searchable(),
+                        Forms\Components\Select::make('volunteer_id')
+                            ->label('Voluntario')
+                            ->relationship('volunteer', 'name')
+                            ->required()
+                            ->preload()
+                            ->searchable(),
+                    ]),
+                Fieldset::make('Derivación')
+                    ->schema([
+                        Forms\Components\Select::make('collaborator_id')
+                            ->label('Colaborador')
+                            ->relationship('collaborator', 'name')
+                            ->required()
+                            ->preload()
+                            ->searchable()
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('reason')
+                            ->label('Motivo')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('observation')
+                            ->label('Observaciones')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                    ]),
+
+                    ]);
+            }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                //
+             ->columns([
+                Tables\Columns\TextColumn::make('beneficiary.name')
+                    ->label('Usuario')
+                    ->numeric()
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('volunteer.name')
+                    ->label('Voluntario')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('collaborator.name')
+                    ->label('Colaborador')
+                    ->numeric()
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('reason')
+                    ->label('Motivo')
+                    ->words(10),
+                Tables\Columns\TextColumn::make('observation')
+                    ->label('Observaciones')
+                    ->words(10),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

@@ -22,8 +22,25 @@ class DonorResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
+             ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255)
+                    ->label('Nombre'),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->maxLength(255)
+                    ->label('Email'),
+                Forms\Components\TextInput::make('phone')
+                    ->tel()
+                    ->maxLength(255)
+                    ->label('Teléfono'),
+                Forms\Components\TextInput::make('address')
+                    ->maxLength(255)
+                    ->label('Dirección'),
+                Forms\Components\Textarea::make('notes')
+                    ->columnSpanFull()
+                    ->label('Notas'),
             ]);
     }
 
@@ -31,7 +48,27 @@ class DonorResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('Teléfono')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Dirección')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
