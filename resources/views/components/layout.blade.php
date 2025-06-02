@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Mi Caritas - Gestión para Cáritas Parroquiales</title>
-    <meta name="description" content="Sistema de gestión integral para Cáritas parroquiales. Optimiza la ayuda social en tu comunidad.">
+    <meta name="description"
+        content="Sistema de gestión integral para Cáritas parroquiales. Optimiza la ayuda social en tu comunidad.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,19 +18,19 @@
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
     <!-- Styles / Scripts -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-    <style>
-        /* Fallback styles if Vite isn't working */
-        body {
-            font-family: 'Instrument Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            line-height: 1.6;
-        }
-    </style>
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <style>
+            /* Fallback styles if Vite isn't working */
+            body {
+                font-family: 'Instrument Sans', sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+                line-height: 1.6;
+            }
+        </style>
     @endif
 </head>
 
@@ -38,4 +39,5 @@
     {{ $slot }}
     <x-footer />
 </body>
+
 </html>

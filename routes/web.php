@@ -13,5 +13,14 @@ foreach (config('tenancy.central_domains') as $domain) {
         Route::post('/register', [TenantRequestController::class, 'store'])
         ->middleware('honeypot', 'throttle:5,1')
         ->name('tenant-request.submit');
+        Route::get('/privacidad', function () {
+            return view('privacidad');
+        })->name('privacidad');
+        Route::get('/terminos', function () {
+            return view('terminos');
+        })->name('terminos');
+        Route::get('/cookies', function () {
+            return view('cookies');
+        })->name('cookies');
     });
 }

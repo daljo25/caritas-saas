@@ -26,4 +26,7 @@ Route::middleware([
     Route::get('/', function () {
         return view('welcome-user');
     });
+    Route::get('/privacidad', function () {
+            return view('privacidad');
+        })->name('privacidad');
 });
